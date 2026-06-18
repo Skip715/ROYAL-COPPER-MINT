@@ -19,35 +19,37 @@ export default function Home() {
         </div>
       </nav>
 
-      {/* HERO — full bleed video, seamless loop */}
-      <section style={{ position: 'relative', height: '100vh', overflow: 'hidden', background: '#0a0a0a' }}>
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', minWidth: '100%', minHeight: '100%', width: 'auto', height: 'auto', objectFit: 'cover' }}
-        >
-          <source src="/coin_video_clean_cropped.mp4" type="video/mp4" />
-        </video>
-        {/* Dark overlay — heavier on left for text legibility */}
-        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.35) 55%, rgba(0,0,0,0.1) 100%)' }}></div>
-        {/* Bottom fade */}
-        <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: '180px', background: 'linear-gradient(to bottom, transparent, rgba(0,0,0,0.6))' }}></div>
+      {/* HERO — split layout, text left, video right */}
+      <section style={{ position: 'relative', height: '100vh', overflow: 'hidden', background: '#0a0a0a', display: 'flex', alignItems: 'center' }}>
 
-        {/* Hero text */}
-        <div style={{ position: 'absolute', bottom: '18%', left: '7%', maxWidth: '560px', zIndex: 2 }}>
-          <p style={{ fontSize: '11px', letterSpacing: '0.4em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.55)', marginBottom: '20px', fontFamily: 'Arial, sans-serif' }}>Est. 2024 · Premium British Bullion</p>
+        {/* Hero text — left side */}
+        <div style={{ position: 'relative', zIndex: 2, maxWidth: '520px', padding: '0 0 0 7%', flexShrink: 0 }}>
+          <p style={{ fontSize: '11px', letterSpacing: '0.4em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.5)', marginBottom: '20px', fontFamily: 'Arial, sans-serif' }}>Est. 2024 · Premium British Bullion</p>
           <h1 style={{ fontSize: '66px', fontWeight: '400', lineHeight: 1.06, color: '#fff', margin: '0 0 24px', letterSpacing: '0.01em' }}>
             Own The<br />
             <em style={{ fontStyle: 'italic', color: '#D4956A' }}>Element</em><br />
             of Progress
           </h1>
-          <p style={{ fontSize: '16px', color: 'rgba(255,255,255,0.65)', lineHeight: 1.75, marginBottom: '44px', fontFamily: 'Georgia, serif' }}>Premium copper bullion and commemorative coins for the modern investor.</p>
+          <p style={{ fontSize: '16px', color: 'rgba(255,255,255,0.6)', lineHeight: 1.75, marginBottom: '44px', fontFamily: 'Georgia, serif' }}>Premium copper bullion and commemorative coins for the modern investor.</p>
           <div style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
             <a href="/shop" style={{ fontSize: '11px', letterSpacing: '0.2em', textTransform: 'uppercase', color: '#fff', border: '1px solid rgba(255,255,255,0.55)', padding: '14px 36px', textDecoration: 'none', fontFamily: 'Arial, sans-serif' }}>Shop Collection</a>
             <a href="/about" style={{ fontSize: '11px', letterSpacing: '0.16em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.6)', textDecoration: 'none', fontFamily: 'Arial, sans-serif' }}>Our Story →</a>
           </div>
+        </div>
+
+        {/* Video — right side, contained */}
+        <div style={{ position: 'absolute', right: 0, top: 0, width: '58%', height: '100%', overflow: 'hidden' }}>
+          {/* Fade edge on left of video */}
+          <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: '200px', background: 'linear-gradient(to right, #0a0a0a, transparent)', zIndex: 1, pointerEvents: 'none' }}></div>
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            style={{ width: '100%', height: '100%', objectFit: 'contain', objectPosition: 'center' }}
+          >
+            <source src="/coin_video_clean_cropped.mp4" type="video/mp4" />
+          </video>
         </div>
 
         {/* Scroll line */}
