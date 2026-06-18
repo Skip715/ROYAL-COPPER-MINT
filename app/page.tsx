@@ -48,7 +48,7 @@ export default function Home() {
             playsInline
             style={{ width: '100%', height: '100%', objectFit: 'contain', objectPosition: 'center' }}
           >
-            <source src="/coin seamless 1.mp4" type="video/mp4" />
+            <source src="/coin_video_clean_cropped.mp4" type="video/mp4" />
           </video>
         </div>
 
