@@ -19,36 +19,50 @@ export default function Home() {
         </div>
       </nav>
 
-      {/* HERO — full bleed video */}
-      <section style={{ position: 'relative', height: '100vh', overflow: 'hidden', background: '#0d0d0d' }}>
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', minWidth: '100%', minHeight: '100%', width: 'auto', height: 'auto', objectFit: 'cover', opacity: 0.92 }}
-        >
-          <source src="/coin_video_clean_cropped.mp4" type="video/mp4" />
-        </video>
-        {/* Overlay gradient */}
-        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.2) 60%, transparent 100%)' }}></div>
-        {/* Hero text */}
-        <div style={{ position: 'absolute', bottom: '18%', left: '7%', maxWidth: '560px' }}>
-          <p style={{ fontSize: '11px', letterSpacing: '0.4em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.6)', marginBottom: '20px', fontFamily: 'Arial, sans-serif' }}>Est. 2024 · Premium British Bullion</p>
-          <h1 style={{ fontSize: '62px', fontWeight: '400', lineHeight: 1.08, color: '#fff', margin: '0 0 24px', letterSpacing: '0.01em' }}>
+      {/* HERO — dark background with spinning coin */}
+      <section style={{ position: 'relative', height: '100vh', overflow: 'hidden', background: '#0a0a0a', display: 'flex', alignItems: 'center' }}>
+        {/* Warm copper glow behind coin */}
+        <div style={{ position: 'absolute', top: '50%', left: '55%', transform: 'translate(-50%, -50%)', width: '700px', height: '700px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(180,100,30,0.18) 0%, rgba(120,60,10,0.08) 45%, transparent 70%)', pointerEvents: 'none' }}></div>
+
+        {/* Spinning coin — right side */}
+        <div style={{ position: 'absolute', right: '5%', top: '50%', transform: 'translateY(-50%)', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          <div style={{ animation: 'float 4s ease-in-out infinite', position: 'relative' }}>
+            <img
+              src="/ChatGPT Image Jun 16, 2026, 11_37_58 AM.png"
+              alt="Royal Copper Mint Coin"
+              style={{
+                width: '560px',
+                height: '560px',
+                objectFit: 'contain',
+                mixBlendMode: 'lighten',
+                animation: 'spinY 8s linear infinite, glowPulse 4s ease-in-out infinite',
+              }}
+            />
+          </div>
+          <div style={{ width: '280px', height: '20px', background: 'radial-gradient(ellipse, rgba(180,100,20,0.35) 0%, transparent 70%)', borderRadius: '50%', filter: 'blur(10px)', animation: 'shadowFloat 4s ease-in-out infinite', marginTop: '-20px' }}></div>
+        </div>
+
+        {/* Gradient fade coin into left */}
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, #0a0a0a 30%, rgba(10,10,10,0.85) 52%, transparent 75%)', pointerEvents: 'none' }}></div>
+
+        {/* Hero text — left side */}
+        <div style={{ position: 'relative', zIndex: 2, maxWidth: '540px', padding: '0 0 0 7%' }}>
+          <p style={{ fontSize: '11px', letterSpacing: '0.4em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.5)', marginBottom: '20px', fontFamily: 'Arial, sans-serif' }}>Est. 2024 · Premium British Bullion</p>
+          <h1 style={{ fontSize: '66px', fontWeight: '400', lineHeight: 1.06, color: '#fff', margin: '0 0 24px', letterSpacing: '0.01em' }}>
             Own The<br />
             <em style={{ fontStyle: 'italic', color: '#D4956A' }}>Element</em><br />
             of Progress
           </h1>
-          <p style={{ fontSize: '16px', color: 'rgba(255,255,255,0.7)', lineHeight: 1.7, marginBottom: '40px', fontFamily: 'Georgia, serif', fontWeight: '400' }}>Premium copper bullion and commemorative coins for the modern investor.</p>
-          <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
-            <a href="/shop" style={{ fontSize: '11px', letterSpacing: '0.2em', textTransform: 'uppercase', color: '#fff', border: '1px solid rgba(255,255,255,0.6)', padding: '14px 36px', textDecoration: 'none', fontFamily: 'Arial, sans-serif', transition: 'all 0.3s' }}>Shop Collection</a>
-            <a href="/about" style={{ fontSize: '11px', letterSpacing: '0.16em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.75)', textDecoration: 'none', fontFamily: 'Arial, sans-serif' }}>Our Story →</a>
+          <p style={{ fontSize: '16px', color: 'rgba(255,255,255,0.6)', lineHeight: 1.75, marginBottom: '44px', fontFamily: 'Georgia, serif' }}>Premium copper bullion and commemorative coins for the modern investor.</p>
+          <div style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
+            <a href="/shop" style={{ fontSize: '11px', letterSpacing: '0.2em', textTransform: 'uppercase', color: '#fff', border: '1px solid rgba(255,255,255,0.55)', padding: '14px 36px', textDecoration: 'none', fontFamily: 'Arial, sans-serif' }}>Shop Collection</a>
+            <a href="/about" style={{ fontSize: '11px', letterSpacing: '0.16em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.6)', textDecoration: 'none', fontFamily: 'Arial, sans-serif' }}>Our Story →</a>
           </div>
         </div>
-        {/* Scroll indicator */}
-        <div style={{ position: 'absolute', bottom: '40px', left: '50%', transform: 'translateX(-50%)', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
-          <div style={{ width: '1px', height: '50px', background: 'linear-gradient(to bottom, transparent, rgba(255,255,255,0.5))', animation: 'scrollLine 2s ease-in-out infinite' }}></div>
+
+        {/* Scroll line */}
+        <div style={{ position: 'absolute', bottom: '40px', left: '50%', transform: 'translateX(-50%)' }}>
+          <div style={{ width: '1px', height: '50px', background: 'linear-gradient(to bottom, transparent, rgba(255,255,255,0.4))', animation: 'scrollLine 2s ease-in-out infinite' }}></div>
         </div>
       </section>
 
@@ -63,7 +77,7 @@ export default function Home() {
         <span style={{ marginLeft: 'auto', fontSize: '11px', color: 'rgba(255,255,255,0.3)', letterSpacing: '0.15em', fontFamily: 'Arial, sans-serif' }}>Cu · 29 · 999.9 Fine Copper</span>
       </div>
 
-      {/* INTRO SECTION — white, editorial */}
+      {/* INTRO — white editorial */}
       <section style={{ maxWidth: '1200px', margin: '0 auto', padding: '120px 60px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '100px', alignItems: 'center' }}>
         <div>
           <p style={{ fontSize: '11px', letterSpacing: '0.35em', textTransform: 'uppercase', color: '#8B5E3C', marginBottom: '24px', fontFamily: 'Arial, sans-serif' }}>The Case For Copper</p>
@@ -87,14 +101,10 @@ export default function Home() {
         </div>
       </section>
 
-      {/* FULL BLEED — copper bars image */}
+      {/* FULL BLEED — copper bars */}
       <section style={{ position: 'relative', height: '80vh', overflow: 'hidden' }}>
-        <img
-          src="/ROYAL COPPER MINT BULLION.png"
-          alt="Royal Copper Mint Bullion Bars"
-          style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center' }}
-        />
-        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to left, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.2) 50%, transparent 100%)' }}></div>
+        <img src="/ROYAL COPPER MINT BULLION.png" alt="Royal Copper Mint Bullion Bars" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center' }} />
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to left, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.2) 50%, transparent 100%)' }}></div>
         <div style={{ position: 'absolute', top: '50%', right: '8%', transform: 'translateY(-50%)', maxWidth: '420px', textAlign: 'right' }}>
           <p style={{ fontSize: '11px', letterSpacing: '0.35em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.55)', marginBottom: '16px', fontFamily: 'Arial, sans-serif' }}>Our Collection</p>
           <h2 style={{ fontSize: '50px', fontWeight: '400', color: '#fff', lineHeight: 1.1, margin: '0 0 20px' }}>Premium<br />Copper Bullion</h2>
@@ -103,7 +113,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* PRODUCTS — white section */}
+      {/* PRODUCTS */}
       <section style={{ maxWidth: '1200px', margin: '0 auto', padding: '100px 60px' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '56px' }}>
           <div>
@@ -120,7 +130,7 @@ export default function Home() {
           ].map(product => (
             <div key={product.name} style={{ background: '#fff', border: '1px solid #eee' }}>
               <div style={{ height: '300px', overflow: 'hidden', position: 'relative', background: '#f5f5f5' }}>
-                <img src={product.img} alt={product.name} style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.6s ease' }} />
+                <img src={product.img} alt={product.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                 <div style={{ position: 'absolute', top: '16px', left: '16px', background: '#1a1a1a', color: '#fff', fontSize: '10px', letterSpacing: '0.18em', textTransform: 'uppercase', padding: '5px 12px', fontFamily: 'Arial, sans-serif' }}>{product.tag}</div>
               </div>
               <div style={{ padding: '28px 24px' }}>
@@ -134,8 +144,6 @@ export default function Home() {
             </div>
           ))}
         </div>
-
-        {/* BESPOKE */}
         <div style={{ marginTop: '2px', background: '#f8f7f5', padding: '50px 60px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', border: '1px solid #eee' }}>
           <div>
             <p style={{ fontSize: '11px', letterSpacing: '0.3em', color: '#8B5E3C', textTransform: 'uppercase', margin: '0 0 10px', fontFamily: 'Arial, sans-serif' }}>Bespoke</p>
@@ -147,11 +155,7 @@ export default function Home() {
 
       {/* FULL BLEED — commemorative coin */}
       <section style={{ position: 'relative', height: '85vh', overflow: 'hidden' }}>
-        <img
-          src="/ROYAL COPPER MINT COMMERORATIVE COIN.png"
-          alt="Royal Copper Mint Commemorative Coin"
-          style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top' }}
-        />
+        <img src="/ROYAL COPPER MINT COMMERORATIVE COIN.png" alt="Royal Copper Mint Commemorative Coin" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top' }} />
         <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.45)' }}></div>
         <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', textAlign: 'center', maxWidth: '680px' }}>
           <p style={{ fontSize: '11px', letterSpacing: '0.4em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.55)', marginBottom: '20px', fontFamily: 'Arial, sans-serif' }}>Limited Edition</p>
@@ -221,6 +225,22 @@ export default function Home() {
       </footer>
 
       <style>{`
+        @keyframes spinY {
+          0% { transform: perspective(900px) rotateY(0deg); }
+          100% { transform: perspective(900px) rotateY(360deg); }
+        }
+        @keyframes float {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-16px); }
+        }
+        @keyframes glowPulse {
+          0%, 100% { filter: drop-shadow(0 0 30px rgba(180,100,20,0.3)) drop-shadow(0 10px 40px rgba(150,70,10,0.4)); }
+          50% { filter: drop-shadow(0 0 60px rgba(210,130,30,0.6)) drop-shadow(0 14px 60px rgba(180,90,15,0.55)); }
+        }
+        @keyframes shadowFloat {
+          0%, 100% { transform: scaleX(1); opacity: 0.5; }
+          50% { transform: scaleX(0.7); opacity: 0.2; }
+        }
         @keyframes pulse {
           0%, 100% { opacity: 1; }
           50% { opacity: 0.3; }
@@ -228,7 +248,7 @@ export default function Home() {
         @keyframes scrollLine {
           0% { opacity: 0; transform: scaleY(0); transform-origin: top; }
           50% { opacity: 1; transform: scaleY(1); }
-          100% { opacity: 0; transform: scaleY(1); transform-origin: bottom; }
+          100% { opacity: 0; }
         }
         a:hover { opacity: 0.7; }
         * { box-sizing: border-box; }
