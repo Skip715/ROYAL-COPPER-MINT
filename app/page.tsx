@@ -19,41 +19,31 @@ export default function Home() {
         </div>
       </nav>
 
-      {/* HERO — dark background with spinning coin */}
-      <section style={{ position: 'relative', height: '100vh', overflow: 'hidden', background: '#0a0a0a', display: 'flex', alignItems: 'center' }}>
-        {/* Warm copper glow behind coin */}
-        <div style={{ position: 'absolute', top: '50%', left: '55%', transform: 'translate(-50%, -50%)', width: '700px', height: '700px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(180,100,30,0.18) 0%, rgba(120,60,10,0.08) 45%, transparent 70%)', pointerEvents: 'none' }}></div>
+      {/* HERO — full bleed video, seamless loop */}
+      <section style={{ position: 'relative', height: '100vh', overflow: 'hidden', background: '#0a0a0a' }}>
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', minWidth: '100%', minHeight: '100%', width: 'auto', height: 'auto', objectFit: 'cover' }}
+        >
+          <source src="/coin_video_clean_cropped.mp4" type="video/mp4" />
+        </video>
+        {/* Dark overlay — heavier on left for text legibility */}
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.35) 55%, rgba(0,0,0,0.1) 100%)' }}></div>
+        {/* Bottom fade */}
+        <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: '180px', background: 'linear-gradient(to bottom, transparent, rgba(0,0,0,0.6))' }}></div>
 
-        {/* Spinning coin — right side */}
-        <div style={{ position: 'absolute', right: '5%', top: '50%', transform: 'translateY(-50%)', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-          <div style={{ animation: 'float 4s ease-in-out infinite', position: 'relative' }}>
-            <img
-              src="/ChatGPT Image Jun 18, 2026, 08_23_08 PM.png"
-              alt="Royal Copper Mint Coin"
-              style={{
-                width: '560px',
-                height: '560px',
-                objectFit: 'contain',
-                mixBlendMode: 'lighten',
-                animation: 'spinY 8s linear infinite, glowPulse 4s ease-in-out infinite',
-              }}
-            />
-          </div>
-          <div style={{ width: '280px', height: '20px', background: 'radial-gradient(ellipse, rgba(180,100,20,0.35) 0%, transparent 70%)', borderRadius: '50%', filter: 'blur(10px)', animation: 'shadowFloat 4s ease-in-out infinite', marginTop: '-20px' }}></div>
-        </div>
-
-        {/* Gradient fade coin into left */}
-        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, #0a0a0a 30%, rgba(10,10,10,0.85) 52%, transparent 75%)', pointerEvents: 'none' }}></div>
-
-        {/* Hero text — left side */}
-        <div style={{ position: 'relative', zIndex: 2, maxWidth: '540px', padding: '0 0 0 7%' }}>
-          <p style={{ fontSize: '11px', letterSpacing: '0.4em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.5)', marginBottom: '20px', fontFamily: 'Arial, sans-serif' }}>Est. 2024 · Premium British Bullion</p>
+        {/* Hero text */}
+        <div style={{ position: 'absolute', bottom: '18%', left: '7%', maxWidth: '560px', zIndex: 2 }}>
+          <p style={{ fontSize: '11px', letterSpacing: '0.4em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.55)', marginBottom: '20px', fontFamily: 'Arial, sans-serif' }}>Est. 2024 · Premium British Bullion</p>
           <h1 style={{ fontSize: '66px', fontWeight: '400', lineHeight: 1.06, color: '#fff', margin: '0 0 24px', letterSpacing: '0.01em' }}>
             Own The<br />
             <em style={{ fontStyle: 'italic', color: '#D4956A' }}>Element</em><br />
             of Progress
           </h1>
-          <p style={{ fontSize: '16px', color: 'rgba(255,255,255,0.6)', lineHeight: 1.75, marginBottom: '44px', fontFamily: 'Georgia, serif' }}>Premium copper bullion and commemorative coins for the modern investor.</p>
+          <p style={{ fontSize: '16px', color: 'rgba(255,255,255,0.65)', lineHeight: 1.75, marginBottom: '44px', fontFamily: 'Georgia, serif' }}>Premium copper bullion and commemorative coins for the modern investor.</p>
           <div style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
             <a href="/shop" style={{ fontSize: '11px', letterSpacing: '0.2em', textTransform: 'uppercase', color: '#fff', border: '1px solid rgba(255,255,255,0.55)', padding: '14px 36px', textDecoration: 'none', fontFamily: 'Arial, sans-serif' }}>Shop Collection</a>
             <a href="/about" style={{ fontSize: '11px', letterSpacing: '0.16em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.6)', textDecoration: 'none', fontFamily: 'Arial, sans-serif' }}>Our Story →</a>
@@ -61,7 +51,7 @@ export default function Home() {
         </div>
 
         {/* Scroll line */}
-        <div style={{ position: 'absolute', bottom: '40px', left: '50%', transform: 'translateX(-50%)' }}>
+        <div style={{ position: 'absolute', bottom: '40px', left: '50%', transform: 'translateX(-50%)', zIndex: 2 }}>
           <div style={{ width: '1px', height: '50px', background: 'linear-gradient(to bottom, transparent, rgba(255,255,255,0.4))', animation: 'scrollLine 2s ease-in-out infinite' }}></div>
         </div>
       </section>
