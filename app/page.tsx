@@ -28,7 +28,7 @@ export default function Home() {
         <div style={{ position: 'absolute', right: '5%', top: '50%', transform: 'translateY(-50%)', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
           <div style={{ animation: 'float 4s ease-in-out infinite', position: 'relative' }}>
             <img
-              src="/ChatGPT_Image_Jun_18__2026__08_23_08_PM.png"
+              src="/ChatGPT Image Jun 18, 2026, 08_23_08 PM.png"
               alt="Royal Copper Mint Coin"
               style={{
                 width: '560px',
