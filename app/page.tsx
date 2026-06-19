@@ -102,11 +102,18 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Seamless looping video */}
-        <div style={{ position: 'absolute', right: 0, top: 0, width: '58%', height: '100%', overflow: 'hidden' }}>
-          <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: '200px', background: 'linear-gradient(to right, #0a0a0a, transparent)', zIndex: 1, pointerEvents: 'none' }} />
-        <SeamlessVideo src="/coin_video_clean_cropped.mp4" />
-        </div>
+       {/* Single play video */}
+<div style={{ position: 'absolute', right: 0, top: 0, width: '58%', height: '100%', overflow: 'hidden' }}>
+  <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: '200px', background: 'linear-gradient(to right, #0a0a0a, transparent)', zIndex: 1, pointerEvents: 'none' }} />
+  <video
+    autoPlay
+    muted
+    playsInline
+    style={{ width: '100%', height: '100%', objectFit: 'contain', objectPosition: 'center' }}
+  >
+    <source src="/coin_video_clean_cropped.mp4" type="video/mp4" />
+  </video>
+</div>
 
         <div style={{ position: 'absolute', bottom: '40px', left: '50%', transform: 'translateX(-50%)', zIndex: 2 }}>
           <div style={{ width: '1px', height: '50px', background: 'linear-gradient(to bottom, transparent, rgba(255,255,255,0.4))', animation: 'scrollLine 2s ease-in-out infinite' }} />
