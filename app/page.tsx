@@ -105,7 +105,7 @@ export default function Home() {
         {/* Seamless looping video */}
         <div style={{ position: 'absolute', right: 0, top: 0, width: '58%', height: '100%', overflow: 'hidden' }}>
           <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: '200px', background: 'linear-gradient(to right, #0a0a0a, transparent)', zIndex: 1, pointerEvents: 'none' }} />
-        src="/coin_triple.mp4"
+        <SeamlessVideo src="/coin_triple.mp4" />
         </div>
 
         <div style={{ position: 'absolute', bottom: '40px', left: '50%', transform: 'translateX(-50%)', zIndex: 2 }}>
