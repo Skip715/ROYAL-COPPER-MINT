@@ -261,7 +261,7 @@ export default function AboutPage() {
       {/* ── FULL-BLEED COPPER IMAGE ── */}
       <section style={{ position: "relative", height: "60vh", overflow: "hidden" }}>
         <img
-          src="/bullion bars photo.jpg"
+          src="/ROYAL COPPER MINT BULLION.png"
           alt="Royal Copper Mint bullion bars"
           style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center" }}
           onError={(e) => {
