@@ -16,7 +16,7 @@ function SeamlessVideo({ src }: { src: string }) {
     a.load();
     b.load();
 
-    const CROSSFADE = 0.5; // seconds before end to start crossfade
+  const CROSSFADE = 1.2; // seconds before end to start crossfade
 
     const tick = () => {
       const current = active.current === "a" ? a : b;
