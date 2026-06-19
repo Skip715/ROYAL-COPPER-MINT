@@ -1,3 +1,70 @@
+"use client";
+
+import { useEffect, useRef } from "react";
+
+function SeamlessVideo({ src }: { src: string }) {
+  const videoA = useRef<HTMLVideoElement>(null);
+  const videoB = useRef<HTMLVideoElement>(null);
+  const active = useRef<"a" | "b">("a");
+
+  useEffect(() => {
+    const a = videoA.current;
+    const b = videoB.current;
+    if (!a || !b) return;
+
+    // Preload both
+    a.load();
+    b.load();
+
+    const CROSSFADE = 0.5; // seconds before end to start crossfade
+
+    const tick = () => {
+      const current = active.current === "a" ? a : b;
+      const next    = active.current === "a" ? b : a;
+
+      if (!current.duration || isNaN(current.duration)) return;
+
+      const remaining = current.duration - current.currentTime;
+
+      if (remaining <= CROSSFADE && next.paused) {
+        next.currentTime = 0;
+        next.play().catch(() => {});
+        // Crossfade volumes (visual elements handled via opacity)
+        current.style.transition = `opacity ${CROSSFADE}s linear`;
+        next.style.transition    = `opacity ${CROSSFADE}s linear`;
+        current.style.opacity = "0";
+        next.style.opacity    = "1";
+        active.current = active.current === "a" ? "b" : "a";
+      }
+    };
+
+    const interval = setInterval(tick, 100);
+    a.play().catch(() => {});
+
+    return () => clearInterval(interval);
+  }, []);
+
+  const videoStyle: React.CSSProperties = {
+    position: "absolute",
+    inset: 0,
+    width: "100%",
+    height: "100%",
+    objectFit: "contain",
+    objectPosition: "center",
+  };
+
+  return (
+    <div style={{ position: "relative", width: "100%", height: "100%" }}>
+      <video ref={videoA} muted playsInline preload="auto" style={{ ...videoStyle, opacity: 1 }}>
+        <source src={src} type="video/mp4" />
+      </video>
+      <video ref={videoB} muted playsInline preload="auto" style={{ ...videoStyle, opacity: 0 }}>
+        <source src={src} type="video/mp4" />
+      </video>
+    </div>
+  );
+}
+
 export default function Home() {
   return (
     <main style={{ margin: 0, padding: 0, fontFamily: "'Garamond', 'EB Garamond', 'Cormorant Garamond', Georgia, serif", background: '#fff', color: '#1a1a1a', overflowX: 'hidden' }}>
@@ -19,10 +86,8 @@ export default function Home() {
         </div>
       </nav>
 
-      {/* HERO — split layout, text left, video right */}
+      {/* HERO */}
       <section style={{ position: 'relative', height: '100vh', overflow: 'hidden', background: '#0a0a0a', display: 'flex', alignItems: 'center' }}>
-
-        {/* Hero text — left side */}
         <div style={{ position: 'relative', zIndex: 2, maxWidth: '520px', padding: '0 0 0 7%', flexShrink: 0 }}>
           <p style={{ fontSize: '11px', letterSpacing: '0.4em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.5)', marginBottom: '20px', fontFamily: 'Arial, sans-serif' }}>Est. 2024 · Premium British Bullion</p>
           <h1 style={{ fontSize: '66px', fontWeight: '400', lineHeight: 1.06, color: '#fff', margin: '0 0 24px', letterSpacing: '0.01em' }}>
@@ -37,24 +102,14 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Video — right side, contained */}
+        {/* Seamless looping video */}
         <div style={{ position: 'absolute', right: 0, top: 0, width: '58%', height: '100%', overflow: 'hidden' }}>
-          {/* Fade edge on left of video */}
-          <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: '200px', background: 'linear-gradient(to right, #0a0a0a, transparent)', zIndex: 1, pointerEvents: 'none' }}></div>
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            style={{ width: '100%', height: '100%', objectFit: 'contain', objectPosition: 'center' }}
-          >
-            <source src="/coin_video_clean_cropped.mp4" type="video/mp4" />
-          </video>
+          <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: '200px', background: 'linear-gradient(to right, #0a0a0a, transparent)', zIndex: 1, pointerEvents: 'none' }} />
+          <SeamlessVideo src="/coin_video_clean_cropped.mp4" />
         </div>
 
-        {/* Scroll line */}
         <div style={{ position: 'absolute', bottom: '40px', left: '50%', transform: 'translateX(-50%)', zIndex: 2 }}>
-          <div style={{ width: '1px', height: '50px', background: 'linear-gradient(to bottom, transparent, rgba(255,255,255,0.4))', animation: 'scrollLine 2s ease-in-out infinite' }}></div>
+          <div style={{ width: '1px', height: '50px', background: 'linear-gradient(to bottom, transparent, rgba(255,255,255,0.4))', animation: 'scrollLine 2s ease-in-out infinite' }} />
         </div>
       </section>
 
@@ -65,11 +120,11 @@ export default function Home() {
         <span style={{ fontSize: '12px', color: '#7BC67E', fontFamily: 'Arial, sans-serif' }}>▲ 0.34%</span>
         <span style={{ color: 'rgba(255,255,255,0.15)' }}>|</span>
         <span style={{ fontSize: '11px', color: 'rgba(255,255,255,0.4)', letterSpacing: '0.2em', fontFamily: 'Arial, sans-serif' }}>Live</span>
-        <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#7BC67E', display: 'inline-block', animation: 'pulse 2s infinite' }}></span>
+        <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#7BC67E', display: 'inline-block', animation: 'pulse 2s infinite' }} />
         <span style={{ marginLeft: 'auto', fontSize: '11px', color: 'rgba(255,255,255,0.3)', letterSpacing: '0.15em', fontFamily: 'Arial, sans-serif' }}>Cu · 29 · 999.9 Fine Copper</span>
       </div>
 
-      {/* INTRO — white editorial */}
+      {/* INTRO */}
       <section style={{ maxWidth: '1200px', margin: '0 auto', padding: '120px 60px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '100px', alignItems: 'center' }}>
         <div>
           <p style={{ fontSize: '11px', letterSpacing: '0.35em', textTransform: 'uppercase', color: '#8B5E3C', marginBottom: '24px', fontFamily: 'Arial, sans-serif' }}>The Case For Copper</p>
@@ -96,7 +151,7 @@ export default function Home() {
       {/* FULL BLEED — copper bars */}
       <section style={{ position: 'relative', height: '80vh', overflow: 'hidden' }}>
         <img src="/ROYAL COPPER MINT BULLION.png" alt="Royal Copper Mint Bullion Bars" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center' }} />
-        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to left, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.2) 50%, transparent 100%)' }}></div>
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to left, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.2) 50%, transparent 100%)' }} />
         <div style={{ position: 'absolute', top: '50%', right: '8%', transform: 'translateY(-50%)', maxWidth: '420px', textAlign: 'right' }}>
           <p style={{ fontSize: '11px', letterSpacing: '0.35em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.55)', marginBottom: '16px', fontFamily: 'Arial, sans-serif' }}>Our Collection</p>
           <h2 style={{ fontSize: '50px', fontWeight: '400', color: '#fff', lineHeight: 1.1, margin: '0 0 20px' }}>Premium<br />Copper Bullion</h2>
@@ -148,7 +203,7 @@ export default function Home() {
       {/* FULL BLEED — commemorative coin */}
       <section style={{ position: 'relative', height: '85vh', overflow: 'hidden' }}>
         <img src="/ROYAL COPPER MINT COMMERORATIVE COIN.png" alt="Royal Copper Mint Commemorative Coin" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top' }} />
-        <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.45)' }}></div>
+        <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.45)' }} />
         <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', textAlign: 'center', maxWidth: '680px' }}>
           <p style={{ fontSize: '11px', letterSpacing: '0.4em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.55)', marginBottom: '20px', fontFamily: 'Arial, sans-serif' }}>Limited Edition</p>
           <h2 style={{ fontSize: '58px', fontWeight: '400', color: '#fff', lineHeight: 1.08, margin: '0 0 24px' }}>The Commemorative<br /><em style={{ fontStyle: 'italic', color: '#D4956A' }}>Copper Coin</em></h2>
@@ -217,22 +272,6 @@ export default function Home() {
       </footer>
 
       <style>{`
-        @keyframes spinY {
-          0% { transform: perspective(900px) rotateY(0deg); }
-          100% { transform: perspective(900px) rotateY(360deg); }
-        }
-        @keyframes float {
-          0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(-16px); }
-        }
-        @keyframes glowPulse {
-          0%, 100% { filter: drop-shadow(0 0 30px rgba(180,100,20,0.3)) drop-shadow(0 10px 40px rgba(150,70,10,0.4)); }
-          50% { filter: drop-shadow(0 0 60px rgba(210,130,30,0.6)) drop-shadow(0 14px 60px rgba(180,90,15,0.55)); }
-        }
-        @keyframes shadowFloat {
-          0%, 100% { transform: scaleX(1); opacity: 0.5; }
-          50% { transform: scaleX(0.7); opacity: 0.2; }
-        }
         @keyframes pulse {
           0%, 100% { opacity: 1; }
           50% { opacity: 0.3; }
@@ -246,5 +285,5 @@ export default function Home() {
         * { box-sizing: border-box; }
       `}</style>
     </main>
-  )
+  );
 }
